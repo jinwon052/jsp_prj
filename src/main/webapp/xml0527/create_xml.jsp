@@ -1,26 +1,20 @@
-package xml0527;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
-
-public class CreateXML {
-
-	public void createXML() {
-		//1.XML 문서객체 생성
+<%@page import="java.io.IOException"%>
+<%@page import="org.jdom2.output.Format"%>
+<%@page import="org.jdom2.output.XMLOutputter"%>
+<%@page import="org.jdom2.Element"%>
+<%@page import="org.jdom2.Document"%>
+<%@ page language="java" contentType="application/xml; charset=UTF-8"
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"
+    info=""%>
+<%
+//1.XML 문서객체 생성
 		Document doc=new Document();
-		
 		
 		//2.최상위 부모노드 생성
 		Element rootNode=new Element("root");
 		
 		//3.자식 노드 생성
 		Element msgNode=new Element("msg");
-//		System.out.println(msgNode);
 		msgNode.setText("안녕하세요?");
 
 		//4.자식노드를 부모노드에 배치
@@ -29,23 +23,15 @@ public class CreateXML {
 		doc.addContent(rootNode);
 		
 		//출력객체 생성
-		//XMLOutputter xout=new XMLOutputter();
 		//XMLOutputter xout=new XMLOutputter(Format.getRawFormat());
 		//XMLOutputter xout=new XMLOutputter(Format.getCompactFormat());
 		XMLOutputter xout=new XMLOutputter(Format.getPrettyFormat());
 		
 		try {
 			//콘솔출력
-			xout.output(doc, System.out);
+			xout.output(doc, out);
 			//파일로 출력
-			xout.output(doc, new FileOutputStream("C:/dev/workspace/jsp_prj/src/main/webapp/xml0527/create.xml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}//end catch
-	}//createXML
-	public static void main(String[] args) {
-		new CreateXML().createXML();
-		
-	}//main
-
-}//class
+%>
